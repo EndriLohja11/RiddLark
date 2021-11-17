@@ -15,7 +15,7 @@ public class Client {
     }
 
     /**
-     * Logs in the client
+     * Client login
      */
     public void login() {
         try {
@@ -30,7 +30,7 @@ public class Client {
     }
 
     /**
-     * Signs up the client
+     * Client register
      */
     public void register() {
         try {

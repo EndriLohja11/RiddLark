@@ -13,7 +13,7 @@ public class ClientInputThread implements Runnable {
     private Socket connection;
     private ObjectInputStream inputStream;
     private UserInterface userInterface;
-    private ExecutorService thPoolServer = Executors.newFixedThreadPool(5); //Create a pool of threads
+    private ExecutorService thPoolServer = Executors.newFixedThreadPool(5); // a pool of threads
 
     public ClientInputThread(Socket connection, UserInterface userInterface) {
         this.connection = connection;
@@ -48,17 +48,17 @@ public class ClientInputThread implements Runnable {
                         break;
                     }
                     case "login": {
-                        System.out.println("You are now successfully registered, login to activate your account");
+                        System.out.println(" You are registered, log in to manage your account");
                         thPoolServer.execute(() -> userInterface.loggedOutInterface());
                         break;
                     }
-                    case "end game": {
+                    case "game over": {
                         thPoolServer.shutdownNow();
                         break endGame;
                     }
                 }
             } catch(ClassNotFoundException | IOException e ) {
-                System.out.println("Lost connection to server, terminating...");
+                System.out.println("connection to server has been lost");
 //                e.printStackTrace();
                 break;
             }

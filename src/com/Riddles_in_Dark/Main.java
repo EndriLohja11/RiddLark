@@ -9,7 +9,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println("Welcome To Team Maker System");
+        System.out.println("Welcome");
         Socket connection = connect();
         if(connection != null) {
             Client client = new Client(connection);
@@ -19,14 +19,14 @@ public class Main {
             clientInputThread.start();
             userInterface.loggedOutInterface();
         } else {
-            System.out.println("You have no connection to the server. Please start server before launching client");
+            System.out.println("You have no connection to the server. Please start server before running client");
         }
     }
     /**
      * Connects the client to the server
      */
     private static Socket connect() {
-        int port = 1235; // initialize port number
+        int port = 1246; //  port number
         String ip = "localhost"; // localhost ip address = 127.0.0.1
         try {
             Socket connection = new Socket(ip, port); //Create a Client Socket for "localhost" address and port

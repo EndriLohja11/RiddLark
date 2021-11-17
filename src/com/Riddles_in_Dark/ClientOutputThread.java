@@ -30,12 +30,12 @@ public class ClientOutputThread implements Runnable {
      */
     public void sendRequest(Request request) {
         try {
-            System.out.println("Connecting ...");
+            System.out.println("Connecting to server");
             outputStream = new ObjectOutputStream(connection.getOutputStream());
             outputStream.writeObject(request);
             outputStream.flush();
         } catch (IOException e) {
-            System.out.println("Couldn't connect to the server...");
+            System.out.println("Cannot create a connection to the server...");
             e.printStackTrace();
         }
     }

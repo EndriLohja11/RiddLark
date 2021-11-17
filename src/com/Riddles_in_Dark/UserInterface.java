@@ -27,7 +27,7 @@ public class UserInterface {
      */
     public void loggedOutInterface() {
         printExitInfo();
-        System.out.println("What do you want to do? Enter number of command");
+        System.out.println("Please enter the right number to proceed");
         System.out.println("1. Login");
         System.out.println("2. Register");
         Scanner scanner = new Scanner(System.in);
@@ -88,7 +88,7 @@ public class UserInterface {
      * Print a simple thanks message on terminating the application
      */
     public static void printThanks() {
-        System.out.println("Thanks for playing...");
+        System.out.println("Thank you for playing the game");
     }
 
     public static String newLine() {

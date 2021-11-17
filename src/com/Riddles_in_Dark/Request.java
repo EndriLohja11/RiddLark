@@ -55,9 +55,7 @@ public class Request implements Serializable {
         this.operation = operation;
     }
 
-    public Character getCharacter() {
-        return character;
-    }
+    public Character getCharacter() {return character; }
     public String getOperation() {
         return operation;
     }
@@ -70,4 +68,3 @@ public class Request implements Serializable {
     public int getTeamId() {return teamId;}
     public int getUserId() { return userId; }
 }
-

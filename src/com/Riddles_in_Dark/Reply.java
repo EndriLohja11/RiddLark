@@ -41,10 +41,5 @@ public class Reply implements Serializable {
 
     ;
 
-/**
- * {
- *      nextOperation: "join team" | "choose character"
- *      data: ["team1", "team2"] | []
- * }
- */
+
 }

@@ -6,11 +6,11 @@ import java.io.Serializable;
 /**
  * This class represents all messages sent from server to client
  */
-public class Reply implements Serializable {
+public class Response implements Serializable {
     private static final long serialVersionUID = 1L;
     private String nextOperation;
-    private Object replyData;
-    private String reply;
+    private Object responseInfo;
+    private String response;
     private User user = null;
 
     /**
@@ -19,20 +19,20 @@ public class Reply implements Serializable {
      * @param replyData
      * @param nextOperation
      */
-    public Reply(String response, User user, Object replyData, String nextOperation) {
+    public Response(String response, User user, Object replyData, String nextOperation) {
         super();
-        this.reply = response;
-        this.replyData = replyData;
+        this.response = response;
+        this.responseInfo = replyData;
         this.nextOperation = nextOperation;
         this.user = user;
     }
 
     public String getResponse() {
-        return this.reply;
+        return this.response;
     }
 
-    public Object getReplyData() {
-        return this.replyData;
+    public Object getResponseInfo() {
+        return this.responseInfo;
     }
 
     public String nextOperation() { return this.nextOperation; }

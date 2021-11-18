@@ -13,11 +13,11 @@ public class Main {
         Socket connection = connect();
         if(connection != null) {
             Client client = new Client(connection);
-            UserInterface userInterface = new UserInterface(client, connection);
+            Interface Interface = new Interface(client, connection);
             System.out.println("Connected to server");
-            Thread clientInputThread = new Thread(new com.programming_distributed_systems_project.ClientInputThread(connection, userInterface));
-            clientInputThread.start();
-            userInterface.loggedOutInterface();
+            Thread clientInput = new Thread(new com.programming_distributed_systems_project.Client_Input(connection, Interface));
+            clientInput.start();
+            Interface.loggedOutInterface();
         } else {
             System.out.println("You have no connection to the server. Please start server before running client");
         }

@@ -1,7 +1,7 @@
 package com.programming_distributed_systems_project;
 
-import com.Riddles_in_Dark.Reply;
-import com.Riddles_in_Dark.UserInterface;
+import com.Riddles_in_Dark.Response;
+import com.Riddles_in_Dark.Interface;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,22 +9,22 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ClientInputThread implements Runnable {
+public class Client_Input implements Runnable {
     private Socket connection;
     private ObjectInputStream inputStream;
-    private UserInterface userInterface;
-    private ExecutorService thPoolServer = Executors.newFixedThreadPool(5); // a pool of threads
+    private Interface Interface;
+    private ExecutorService Serverthreads = Executors.newFixedThreadPool(5); // a multiple threads
 
-    public ClientInputThread(Socket connection, UserInterface userInterface) {
+    public Client_Input(Socket connection, Interface Interface) {
         this.connection = connection;
-        this.userInterface = userInterface;
+        this.Interface = Interface;
 
     }
 
     @Override
     public void run() {
         try {
-            handleReply();
+            handleResponses();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,29 +32,29 @@ public class ClientInputThread implements Runnable {
     }
 
     /**
-     * Handle all replies sent from server to client
+     * Handle all responses sent from server to client
      */
-    public void handleReply() {
-        endGame: while(!thPoolServer.isTerminated() && !thPoolServer.isShutdown()) {
+    public void handleResponses() {
+        GameOver: while(!Serverthreads.isTerminated() && !Serverthreads.isShutdown()) {
             try {
                 inputStream = new ObjectInputStream(connection.getInputStream());
-                Reply reply = (Reply) inputStream.readObject(); //Read Server Reply
-                String nextOperation = reply.nextOperation();
-                Object replyData = reply.getReplyData();
-                System.out.println(reply.getResponse());
+                Response response = (Response) inputStream.readObject(); //Read Server Reply
+                String nextOperation = response.nextOperation();
+                Object responseInfo = response.getResponseInfo();
+                System.out.println(response.getResponse());
                 switch (nextOperation) {
                     case "retry": {
-                        thPoolServer.execute(() -> userInterface.loggedOutInterface());
+                        Serverthreads.execute(() -> Interface.loggedOutInterface());
                         break;
                     }
                     case "login": {
                         System.out.println(" You are registered, log in to manage your account");
-                        thPoolServer.execute(() -> userInterface.loggedOutInterface());
+                        Serverthreads.execute(() -> Interface.loggedOutInterface());
                         break;
                     }
                     case "game over": {
-                        thPoolServer.shutdownNow();
-                        break endGame;
+                        Serverthreads.shutdownNow();
+                        break GameOver;
                     }
                 }
             } catch(ClassNotFoundException | IOException e ) {

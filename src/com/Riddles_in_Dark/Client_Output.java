@@ -4,20 +4,20 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ClientOutputThread implements Runnable {
+public class Client_Output implements Runnable {
     private Socket connection;
     private ObjectOutputStream outputStream;
-    private Request request;
+    private Call call;
 
-    public ClientOutputThread(Socket connection, Request request) {
+    public Client_Output(Socket connection, Call call) {
         this.connection = connection;
-        this.request = request;
+        this.call = call;
     }
 
     @Override
     public void run() {
         try {
-            sendRequest(request);
+            sendRequest(call);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -25,14 +25,14 @@ public class ClientOutputThread implements Runnable {
     }
 
     /**
-     * Handle all request made by client to server
-     * @param request
+     * Handle all call made by client to server
+     * @param call
      */
-    public void sendRequest(Request request) {
+    public void sendRequest(Call call) {
         try {
             System.out.println("Connecting to server");
             outputStream = new ObjectOutputStream(connection.getOutputStream());
-            outputStream.writeObject(request);
+            outputStream.writeObject(call);
             outputStream.flush();
         } catch (IOException e) {
             System.out.println("Cannot create a connection to the server...");
@@ -41,3 +41,4 @@ public class ClientOutputThread implements Runnable {
     }
 
 }
+
